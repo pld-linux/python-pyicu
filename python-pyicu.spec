@@ -42,9 +42,8 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc CHANGES CREDITS LICENSE README
-%{py_sitedir}/PyICU.py
 %{py_sitedir}/PyICU.py[co]
-%{py_sitedir}/_PyICU.so
+%attr(755,root,root) %{py_sitedir}/_PyICU.so
 %if "%{py_ver}" > "2.4"
 %{py_sitedir}/PyICU-%{version}*.egg-info
 %endif
