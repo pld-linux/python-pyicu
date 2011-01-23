@@ -11,6 +11,8 @@ Source0:	http://pypi.python.org/packages/source/P/PyICU/PyICU-%{version}.tar.gz
 BuildRequires:	libicu-devel >= 3.6
 BuildRequires:	libstdc++-devel
 BuildRequires:	python-devel >= 1:2.3
+BuildRequires:	python-modules
+BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
