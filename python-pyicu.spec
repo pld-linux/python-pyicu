@@ -2,7 +2,7 @@
 Summary:	PyICU is a python extension wrapping IBM's ICU C++ API
 Name:		python-%{module}
 Version:	1.0
-Release:	1
+Release:	2
 License:	BSD-like
 Group:		Development/Languages/Python
 URL:		http://pyicu.osafoundation.org/
