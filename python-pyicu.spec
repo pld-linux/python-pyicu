@@ -1,13 +1,13 @@
 %define 	module	pyicu
 Summary:	PyICU is a python extension wrapping IBM's ICU C++ API
 Name:		python-%{module}
-Version:	1.0
-Release:	3
+Version:	1.1
+Release:	1
 License:	BSD-like
 Group:		Development/Languages/Python
 URL:		http://pyicu.osafoundation.org/
 Source0:	http://pypi.python.org/packages/source/P/PyICU/PyICU-%{version}.tar.gz
-# Source0-md5:	138d257dd11e1c438d8d7b7fec9a2bdf
+# Source0-md5:	70cbb5b43c3e6939b74c3f1b27e47aae
 BuildRequires:	libicu-devel >= 3.6
 BuildRequires:	libstdc++-devel
 BuildRequires:	python-devel >= 1:2.3
