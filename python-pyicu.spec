@@ -1,13 +1,13 @@
-%define 	module	pyicu
-Summary:	PyICU is a python extension wrapping IBM's ICU C++ API
-Name:		python-%{module}
-Version:	1.2
+Summary:	PyICU - Python extension wrapping IBM's ICU C++ API
+Summary(pl.UTF-8):	PyICU - rozszerzenie Pythona obudowujące API C++ biblioteki ICU firmy IBM
+Name:		python-pyicu
+Version:	1.3
 Release:	1
-License:	BSD-like
+License:	MIT-like
 Group:		Development/Languages/Python
-URL:		http://pyicu.osafoundation.org/
 Source0:	http://pypi.python.org/packages/source/P/PyICU/PyICU-%{version}.tar.gz
-# Source0-md5:	d2d20ab5b233f1d6d2d7e69ba8b5f959
+# Source0-md5:	c1d1b8ec79d0f6c670a8f093792c180f
+URL:		http://pyicu.osafoundation.org/
 BuildRequires:	libicu-devel >= 3.6
 BuildRequires:	libstdc++-devel
 BuildRequires:	python-devel >= 1:2.3
@@ -17,7 +17,11 @@ BuildRequires:	rpmbuild(macros) >= 1.219
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-PyICU is a python extension wrapping IBM's ICU C++ API.
+PyICU is a Python extension wrapping IBM's ICU C++ API.
+
+%description -l pl.UTF-8
+PyICU to rozszerzenie Pythona obudowujące API C++ biblioteki ICU firmy
+IBM.
 
 %prep
 %setup -q -n PyICU-%{version}
@@ -47,5 +51,5 @@ rm -rf $RPM_BUILD_ROOT
 %{py_sitedir}/icu.py[co]
 %attr(755,root,root) %{py_sitedir}/_icu.so
 %if "%{py_ver}" > "2.4"
-%{py_sitedir}/PyICU-%{version}*.egg-info
+%{py_sitedir}/PyICU-%{version}-py*.egg-info
 %endif
