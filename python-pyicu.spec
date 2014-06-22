@@ -6,12 +6,12 @@
 Summary:	PyICU - Python 2 extension wrapping IBM's ICU C++ API
 Summary(pl.UTF-8):	PyICU - rozszerzenie Pythona 2 obudowujące API C++ biblioteki ICU firmy IBM
 Name:		python-pyicu
-Version:	1.6
+Version:	1.8
 Release:	1
 License:	MIT-like
 Group:		Development/Languages/Python
 Source0:	https://pypi.python.org/packages/source/P/PyICU/PyICU-%{version}.tar.gz
-# Source0-md5:	5e080392a01820a5e99add20ac9a3e40
+# Source0-md5:	00c8d40e5400f52c8474aa9480e8dbc1
 URL:		http://pyicu.osafoundation.org/
 BuildRequires:	libicu-devel >= 3.6
 BuildRequires:	libstdc++-devel
