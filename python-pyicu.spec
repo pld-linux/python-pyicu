@@ -59,16 +59,12 @@ Ten pakiet zawiera moduł Pythona 3.
 
 %build
 %if %{with python2}
-CC="%{__cc}" \
-CFLAGS="%{rpmcflags}" \
-%{__python} setup.py build \
+%py_build \
 	--build-base build-2
 %endif
 
 %if %{with python3}
-CC="%{__cc}" \
-CFLAGS="%{rpmcflags}" \
-%{__python3} setup.py build \
+%py3_build \
 	--build-base build-3
 %endif
 
@@ -76,7 +72,7 @@ CFLAGS="%{rpmcflags}" \
 rm -rf $RPM_BUILD_ROOT
 
 %if %{with python2}
-%{__python} setup.py build \
+%py_build \
 		--build-base build-2 \
 	install \
 		--skip-build \
@@ -87,7 +83,7 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %if %{with python3}
-%{__python3} setup.py build \
+%py3_build \
 		--build-base build-3 \
 	install \
 		--skip-build \
