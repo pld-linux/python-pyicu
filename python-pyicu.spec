@@ -7,7 +7,7 @@ Summary:	PyICU - Python 2 extension wrapping IBM's ICU C++ API
 Summary(pl.UTF-8):	PyICU - rozszerzenie Pythona 2 obudowujące API C++ biblioteki ICU firmy IBM
 Name:		python-pyicu
 Version:	1.8
-Release:	7
+Release:	8
 License:	MIT-like
 Group:		Development/Languages/Python
 Source0:	https://pypi.python.org/packages/source/P/PyICU/PyICU-%{version}.tar.gz
@@ -24,7 +24,7 @@ BuildRequires:	python3-devel >= 3.2
 BuildRequires:	python3-modules >= 3.2
 %endif
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.710
+BuildRequires:	rpmbuild(macros) >= 1.714
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -59,36 +59,23 @@ Ten pakiet zawiera moduł Pythona 3.
 
 %build
 %if %{with python2}
-%py_build \
-	--build-base build-2
+%py_build
 %endif
 
 %if %{with python3}
-%py3_build \
-	--build-base build-3
+%py3_build
 %endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 %if %{with python2}
-%py_build \
-		--build-base build-2 \
-	install \
-		--skip-build \
-		--optimize=2 \
-		--root=$RPM_BUILD_ROOT
-
+%py_install
 %py_postclean
 %endif
 
 %if %{with python3}
-%py3_build \
-		--build-base build-3 \
-	install \
-		--skip-build \
-		--optimize=2 \
-		--root=$RPM_BUILD_ROOT
+%py3_install
 %endif
 
 %clean
