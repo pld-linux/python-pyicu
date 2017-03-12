@@ -6,13 +6,13 @@
 Summary:	PyICU - Python 2 extension wrapping IBM's ICU C++ API
 Summary(pl.UTF-8):	PyICU - rozszerzenie Pythona 2 obudowujące API C++ biblioteki ICU firmy IBM
 Name:		python-pyicu
-Version:	1.8
-Release:	11
+Version:	1.9.5
+Release:	1
 License:	MIT-like
 Group:		Development/Languages/Python
-Source0:	https://pypi.python.org/packages/source/P/PyICU/PyICU-%{version}.tar.gz
-# Source0-md5:	00c8d40e5400f52c8474aa9480e8dbc1
-URL:		http://pyicu.osafoundation.org/
+Source0:	https://pypi.python.org/packages/a2/9f/1947f288143191b903e58633ee597cb98bc284de28dafb1231b6f8b67b99/PyICU-%{version}.tar.gz
+# Source0-md5:	30f85b7272f15b26c110c9f3e3a9e7a0
+URL:		http://site.icu-project.org/
 BuildRequires:	libicu-devel >= 3.6
 BuildRequires:	libstdc++-devel
 %if %{with python2}
@@ -84,7 +84,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python2}
 %files
 %defattr(644,root,root,755)
-%doc CHANGES CREDITS LICENSE README
+%doc CHANGES CREDITS LICENSE README.md
 %{py_sitedir}/PyICU.py[co]
 %{py_sitedir}/docs.py[co]
 %{py_sitedir}/icu.py[co]
@@ -97,7 +97,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python3}
 %files -n python3-pyicu
 %defattr(644,root,root,755)
-%doc CHANGES CREDITS LICENSE README
+%doc CHANGES CREDITS LICENSE README.md
 %{py3_sitedir}/PyICU.py
 %{py3_sitedir}/docs.py
 %{py3_sitedir}/icu.py
