@@ -2,6 +2,7 @@
 # Conditional build:
 %bcond_without	python2	# CPython 2.x module
 %bcond_without	python3	# CPython 3.x module
+%bcond_without	tests	# unit tests
 #
 Summary:	PyICU - Python 2 extension wrapping IBM's ICU C++ API
 Summary(pl.UTF-8):	PyICU - rozszerzenie Pythona 2 obudowujące API C++ biblioteki ICU firmy IBM
@@ -20,8 +21,8 @@ BuildRequires:	python-devel >= 1:2.3
 BuildRequires:	python-modules >= 1:2.3
 %endif
 %if %{with python3}
-BuildRequires:	python3-devel >= 3.2
-BuildRequires:	python3-modules >= 3.2
+BuildRequires:	python3-devel >= 1:3.2
+BuildRequires:	python3-modules >= 1:3.2
 %endif
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
@@ -59,11 +60,14 @@ Ten pakiet zawiera moduł Pythona 3.
 
 %build
 %if %{with python2}
-%py_build
+%py_build %{?with_tests:test}
 %endif
 
 %if %{with python3}
 %py3_build
+
+# tests are 2to3'ed after setup()
+%{?with_tests:%py3_build test}
 %endif
 
 %install
