@@ -7,13 +7,13 @@
 Summary:	PyICU - Python 2 extension wrapping IBM's ICU C++ API
 Summary(pl.UTF-8):	PyICU - rozszerzenie Pythona 2 obudowujące API C++ biblioteki ICU firmy IBM
 Name:		python-pyicu
-Version:	1.9.5
+Version:	1.9.6
 Release:	1
 License:	MIT-like
 Group:		Development/Languages/Python
-Source0:	https://pypi.python.org/packages/a2/9f/1947f288143191b903e58633ee597cb98bc284de28dafb1231b6f8b67b99/PyICU-%{version}.tar.gz
-# Source0-md5:	30f85b7272f15b26c110c9f3e3a9e7a0
-URL:		http://site.icu-project.org/
+Source0:	https://pypi.python.org/packages/bc/78/f4e26f67c9b6b9074baa576ae67947e42fb86039199a65e9ab91ddb51d26/PyICU-%{version}.tar.gz
+# Source0-md5:	bb7838411ba9c7363503745220c754e9
+URL:		https://pypi.python.org/pypi/PyICU
 BuildRequires:	libicu-devel >= 3.6
 BuildRequires:	libstdc++-devel
 %if %{with python2}
@@ -90,8 +90,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc CHANGES CREDITS LICENSE README.md
 %{py_sitedir}/PyICU.py[co]
-%{py_sitedir}/docs.py[co]
-%{py_sitedir}/icu.py[co]
+%dir %{py_sitedir}/icu
+%{py_sitedir}/icu/__init__.py[co]
+%{py_sitedir}/icu/docs.py[co]
 %attr(755,root,root) %{py_sitedir}/_icu.so
 %if "%{py_ver}" > "2.4"
 %{py_sitedir}/PyICU-%{version}-py*.egg-info
@@ -103,11 +104,13 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc CHANGES CREDITS LICENSE README.md
 %{py3_sitedir}/PyICU.py
-%{py3_sitedir}/docs.py
-%{py3_sitedir}/icu.py
+%dir %{py3_sitedir}/icu
 %{py3_sitedir}/__pycache__/PyICU.*.py[co]
-%{py3_sitedir}/__pycache__/docs.*.py[co]
-%{py3_sitedir}/__pycache__/icu.*.py[co]
+%{py3_sitedir}/icu/__init__.py
+%{py3_sitedir}/icu/docs.py
+%dir %{py3_sitedir}/icu/__pycache__
+%{py3_sitedir}/icu/__pycache__/__init__.*.py[co]
+%{py3_sitedir}/icu/__pycache__/docs.*.py[co]
 %attr(755,root,root) %{py3_sitedir}/_icu.cpython-*.so
 %{py3_sitedir}/PyICU-%{version}-py*.egg-info
 %endif
