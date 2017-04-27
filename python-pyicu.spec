@@ -14,13 +14,14 @@ Group:		Development/Languages/Python
 Source0:	https://pypi.python.org/packages/bc/78/f4e26f67c9b6b9074baa576ae67947e42fb86039199a65e9ab91ddb51d26/PyICU-%{version}.tar.gz
 # Source0-md5:	bb7838411ba9c7363503745220c754e9
 URL:		https://pypi.python.org/pypi/PyICU
-BuildRequires:	libicu-devel >= 3.6
-BuildRequires:	libstdc++-devel
+BuildRequires:	libicu-devel >= 59
+BuildRequires:	libstdc++-devel >= 6:4.7
 %if %{with python2}
 BuildRequires:	python-devel >= 1:2.3
 BuildRequires:	python-modules >= 1:2.3
 %endif
 %if %{with python3}
+BuildRequires:	python3-2to3 >= 1:3.2
 BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	python3-modules >= 1:3.2
 %endif
@@ -59,15 +60,21 @@ Ten pakiet zawiera moduł Pythona 3.
 %setup -q -n PyICU-%{version}
 
 %build
+# uses ICU C++ API, which (in case if icu 59+) needs char16_t as distinct type, i.e. C++ 11
+CFLAGS="%{rpmcxxflags} %{rpmcppflags} -std=c++11"
+
 %if %{with python2}
-%py_build %{?with_tests:test}
+%py_build
+
+# tests need module already built
+%{?with_tests:PYTHONPATH=$(pwd)/$(echo build-2/lib.*) %{__python} -m unittest discover -s test}
 %endif
 
 %if %{with python3}
 %py3_build
 
-# tests are 2to3'ed after setup()
-%{?with_tests:%py3_build test}
+# tests to be 2to3'ed (by setup) and module already built
+%{?with_tests:PYTHONPATH=$(pwd)/$(echo build-3/lib.*) %{__python3} -m unittest discover -s test}
 %endif
 
 %install
