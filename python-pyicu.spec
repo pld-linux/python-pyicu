@@ -11,20 +11,27 @@ Version:	2.3
 Release:	3
 License:	MIT-like
 Group:		Development/Languages/Python
-Source0:	https://files.pythonhosted.org/packages/87/10/fdf5842f42834f6e3141668b607c07bc3c94de39acf582c3d4015e7a7fc5/PyICU-2.3.tar.gz
+#Source0Download: https://pypi.org/simple/PyICU/
+Source0:	https://files.pythonhosted.org/packages/source/P/PyICU/PyICU-%{version}.tar.gz
 # Source0-md5:	622d9bc07bca7d5be4b5cc061f4770c4
 Patch0:		0001-disable-failing-test.patch
-URL:		https://pypi.python.org/pypi/PyICU
+URL:		https://pypi.org/project/PyICU/
 BuildRequires:	libicu-devel >= 59
 BuildRequires:	libstdc++-devel >= 6:4.7
 %if %{with python2}
 BuildRequires:	python-devel >= 1:2.3
 BuildRequires:	python-modules >= 1:2.3
+%if %{with tests}
+BuildRequires:	python-six
+%endif
 %endif
 %if %{with python3}
 BuildRequires:	python3-2to3 >= 1:3.2
 BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	python3-modules >= 1:3.2
+%if %{with tests}
+BuildRequires:	python3-six
+%endif
 %endif
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
