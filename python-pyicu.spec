@@ -7,13 +7,13 @@
 Summary:	PyICU - Python 2 extension wrapping IBM's ICU C++ API
 Summary(pl.UTF-8):	PyICU - rozszerzenie Pythona 2 obudowujące API C++ biblioteki ICU firmy IBM
 Name:		python-pyicu
-Version:	2.8
-Release:	3
+Version:	2.9
+Release:	1
 License:	MIT-like
 Group:		Development/Languages/Python
 #Source0Download: https://pypi.org/simple/PyICU/
 Source0:	https://files.pythonhosted.org/packages/source/P/PyICU/PyICU-%{version}.tar.gz
-# Source0-md5:	307fe365cf75fec1d1f744c387ac67d8
+# Source0-md5:	9ea06979b28c132bca0df3cf26628704
 Patch0:		0001-disable-failing-test.patch
 URL:		https://pypi.org/project/PyICU/
 BuildRequires:	libicu-devel >= 59
@@ -105,10 +105,9 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc CHANGES CREDITS LICENSE README.md
-%{py_sitedir}/PyICU.py[co]
 %dir %{py_sitedir}/icu
 %{py_sitedir}/icu/__init__.py[co]
-%attr(755,root,root) %{py_sitedir}/_icu.so
+%attr(755,root,root) %{py_sitedir}/icu/_icu_.so
 %if "%{py_ver}" > "2.4"
 %{py_sitedir}/PyICU-%{version}-py*.egg-info
 %endif
@@ -118,12 +117,9 @@ rm -rf $RPM_BUILD_ROOT
 %files -n python3-pyicu
 %defattr(644,root,root,755)
 %doc CHANGES CREDITS LICENSE README.md
-%{py3_sitedir}/PyICU.py
 %dir %{py3_sitedir}/icu
-%{py3_sitedir}/__pycache__/PyICU.*.py[co]
 %{py3_sitedir}/icu/__init__.py
-%dir %{py3_sitedir}/icu/__pycache__
-%{py3_sitedir}/icu/__pycache__/__init__.*.py[co]
-%attr(755,root,root) %{py3_sitedir}/_icu.cpython-*.so
+%{py3_sitedir}/icu/__pycache__
+%attr(755,root,root) %{py3_sitedir}/icu/_icu_.cpython-*.so
 %{py3_sitedir}/PyICU-%{version}-py*.egg-info
 %endif
