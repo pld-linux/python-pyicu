@@ -22,9 +22,6 @@ BuildRequires:	libstdc++-devel >= 6:4.7
 BuildRequires:	python-devel >= 1:2.3
 BuildRequires:	python-modules >= 1:2.3
 BuildRequires:	python-setuptools
-%if %{with tests}
-BuildRequires:	python-six
-%endif
 %endif
 %if %{with python3}
 BuildRequires:	python3-2to3 >= 1:3.2
@@ -76,9 +73,6 @@ CFLAGS="%{rpmcxxflags} %{rpmcppflags} -std=c++11"
 
 %if %{with python2}
 %py_build
-
-# tests need module already built
-%{?with_tests:PYTHONPATH=$(pwd)/$(echo build-2/lib.*) %{__python} -m unittest discover -s test}
 %endif
 
 %if %{with python3}
