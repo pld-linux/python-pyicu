@@ -21,6 +21,7 @@ BuildRequires:	libstdc++-devel >= 6:4.7
 %if %{with python2}
 BuildRequires:	python-devel >= 1:2.3
 BuildRequires:	python-modules >= 1:2.3
+BuildRequires:	python-setuptools
 %if %{with tests}
 BuildRequires:	python-six
 %endif
@@ -29,6 +30,7 @@ BuildRequires:	python-six
 BuildRequires:	python3-2to3 >= 1:3.2
 BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	python3-modules >= 1:3.2
+BuildRequires:	python3-setuptools
 %if %{with tests}
 BuildRequires:	python3-six
 %endif
