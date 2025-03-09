@@ -65,7 +65,7 @@ Ten pakiet zawiera moduł Pythona 3.
 
 %prep
 %setup -q -n pyicu-%{version}
-%patch0 -p1
+%patch -P 0 -p1
 
 %build
 # uses ICU C++ API, which (in case if icu 59+) needs char16_t as distinct type, i.e. C++ 11
