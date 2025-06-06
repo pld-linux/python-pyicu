@@ -7,13 +7,13 @@
 Summary:	PyICU - Python 2 extension wrapping IBM's ICU C++ API
 Summary(pl.UTF-8):	PyICU - rozszerzenie Pythona 2 obudowujące API C++ biblioteki ICU firmy IBM
 Name:		python-pyicu
-Version:	2.14
-Release:	3
+Version:	2.15.2
+Release:	1
 License:	MIT-like
 Group:		Development/Languages/Python
 #Source0Download: https://pypi.org/simple/PyICU/
-Source0:	https://files.pythonhosted.org/packages/source/P/PyICU/PyICU-%{version}.tar.gz
-# Source0-md5:	7ec5ad0d62a2a27f919ca8a775352a71
+Source0:	https://files.pythonhosted.org/packages/source/p/pyicu/pyicu-%{version}.tar.gz
+# Source0-md5:	4d235f2ab7d117a0d2fcaae138399645
 Patch0:		0001-disable-failing-test.patch
 URL:		https://pypi.org/project/PyICU/
 BuildRequires:	libicu-devel >= 59
@@ -24,7 +24,7 @@ BuildRequires:	python-modules >= 1:2.3
 BuildRequires:	python-setuptools
 %endif
 %if %{with python3}
-BuildRequires:	python3-2to3 >= 1:3.2
+#BuildRequires:	python3-2to3 >= 1:3.2
 BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	python3-modules >= 1:3.2
 BuildRequires:	python3-setuptools
@@ -65,12 +65,9 @@ Ten pakiet zawiera moduł Pythona 3.
 
 %prep
 %setup -q -n pyicu-%{version}
-%patch -P 0 -p1
+#patch -P 0 -p1
 
 %build
-# uses ICU C++ API, which (in case if icu 59+) needs char16_t as distinct type, i.e. C++ 11
-CFLAGS="%{rpmcxxflags} %{rpmcppflags} -std=c++11"
-
 %if %{with python2}
 %py_build
 %endif
@@ -104,9 +101,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py_sitedir}/icu
 %{py_sitedir}/icu/__init__.py[co]
 %attr(755,root,root) %{py_sitedir}/icu/_icu_.so
-%if "%{py_ver}" > "2.4"
-%{py_sitedir}/PyICU-%{version}-py*.egg-info
-%endif
+%{py_sitedir}/pyicu-%{version}-py*.egg-info
 %endif
 
 %if %{with python3}
@@ -117,5 +112,5 @@ rm -rf $RPM_BUILD_ROOT
 %{py3_sitedir}/icu/__init__.py
 %{py3_sitedir}/icu/__pycache__
 %attr(755,root,root) %{py3_sitedir}/icu/_icu_.cpython-*.so
-%{py3_sitedir}/PyICU-%{version}-py*.egg-info
+%{py3_sitedir}/pyicu-%{version}-py*.egg-info
 %endif
