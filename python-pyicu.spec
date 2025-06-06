@@ -14,7 +14,6 @@ Group:		Development/Languages/Python
 #Source0Download: https://pypi.org/simple/PyICU/
 Source0:	https://files.pythonhosted.org/packages/source/p/pyicu/pyicu-%{version}.tar.gz
 # Source0-md5:	4d235f2ab7d117a0d2fcaae138399645
-Patch0:		0001-disable-failing-test.patch
 URL:		https://pypi.org/project/PyICU/
 BuildRequires:	libicu-devel >= 59
 BuildRequires:	libstdc++-devel >= 6:4.7
@@ -65,7 +64,6 @@ Ten pakiet zawiera moduł Pythona 3.
 
 %prep
 %setup -q -n pyicu-%{version}
-#patch -P 0 -p1
 
 %build
 %if %{with python2}
