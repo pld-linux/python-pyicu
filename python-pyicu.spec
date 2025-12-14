@@ -7,23 +7,22 @@
 Summary:	PyICU - Python 2 extension wrapping IBM's ICU C++ API
 Summary(pl.UTF-8):	PyICU - rozszerzenie Pythona 2 obudowujące API C++ biblioteki ICU firmy IBM
 Name:		python-pyicu
-Version:	2.15.2
+Version:	2.16
 Release:	1
 License:	MIT-like
 Group:		Development/Languages/Python
 #Source0Download: https://pypi.org/simple/PyICU/
 Source0:	https://files.pythonhosted.org/packages/source/p/pyicu/pyicu-%{version}.tar.gz
-# Source0-md5:	4d235f2ab7d117a0d2fcaae138399645
+# Source0-md5:	00715b86c27c150f48554a863688e878
 URL:		https://pypi.org/project/PyICU/
 BuildRequires:	libicu-devel >= 59
-BuildRequires:	libstdc++-devel >= 6:4.7
+BuildRequires:	libstdc++-devel >= 6:7
 %if %{with python2}
 BuildRequires:	python-devel >= 1:2.3
 BuildRequires:	python-modules >= 1:2.3
 BuildRequires:	python-setuptools
 %endif
 %if %{with python3}
-#BuildRequires:	python3-2to3 >= 1:3.2
 BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	python3-modules >= 1:3.2
 BuildRequires:	python3-setuptools
@@ -68,13 +67,21 @@ Ten pakiet zawiera moduł Pythona 3.
 %build
 %if %{with python2}
 %py_build
+
+%if 0 && %{with tests}
+# some tests expect str to be unicode (python3 behaviour)
+PYTHONPATH=$(readlink -f build-2/lib.*) \
+%{__python} -m unittest discover -s test
+%endif
 %endif
 
 %if %{with python3}
 %py3_build
 
-# tests to be 2to3'ed (by setup) and module already built
-%{?with_tests:PYTHONPATH=$(pwd)/$(echo build-3/lib.*) %{__python3} -m unittest discover -s test}
+%if %{with tests}
+PYTHONPATH=$(readlink -f build-3/lib.*) \
+%{__python3} -m unittest discover -s test
+%endif
 %endif
 
 %install
@@ -82,6 +89,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %if %{with python2}
 %py_install
+
 %py_postclean
 %endif
 
@@ -98,7 +106,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGES CREDITS LICENSE README.md
 %dir %{py_sitedir}/icu
 %{py_sitedir}/icu/__init__.py[co]
-%attr(755,root,root) %{py_sitedir}/icu/_icu_.so
+%{py_sitedir}/icu/_icu_.so
 %{py_sitedir}/pyicu-%{version}-py*.egg-info
 %endif
 
@@ -109,6 +117,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py3_sitedir}/icu
 %{py3_sitedir}/icu/__init__.py
 %{py3_sitedir}/icu/__pycache__
-%attr(755,root,root) %{py3_sitedir}/icu/_icu_.cpython-*.so
+%{py3_sitedir}/icu/_icu_.cpython-*.so
 %{py3_sitedir}/pyicu-%{version}-py*.egg-info
 %endif
